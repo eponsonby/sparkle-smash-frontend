@@ -1,14 +1,14 @@
-class GamesAdapter {
+class UsersAdapter {
     constructor() {
-        this.baseUrl = 'http://localhost:3000/games'
+        this.baseUrl = 'http://localhost:3000/users'
     }
 
-    getGames() {
+    getUsers() {
         return fetch(this.baseUrl).then(res => res.json()
         )
     }
 
-    async saveGame(params) {
+    async saveUser(params) {
         const res = await fetch(this.baseUrl, {
             method: "POST",
             headers: {

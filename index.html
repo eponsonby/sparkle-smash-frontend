@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel ="stylesheet" href="styles/home.css">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Galada&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
+    <h4>Sparkle Smash</h4>
     <div id ="app-container">
-        <p>test</p>
+            <div id ="welcome-screen">
+                    <h1>Welcome! Please enter your name</h1>
+                    <form id="new-user" action="http://localhost:3000/users">
+                            name:
+                            <input type="text" name="name">
+                            <input type="submit" value="Submit">
+                          </form>
+                </div>
+        <p></p>
         <div id="game-container">
                 <button id="begin-button">begin</button>
-                <!-- <button id="pause-button">pause</button> -->
                 <button id="end-button">end game</button>
             <p></p>
             <div id ="unicorns-grid">
@@ -50,10 +60,8 @@
 
         </div>
     </div>
-    <script src="src/pageManagers/unicorns.js"></script>
     <script src="src/components/unicorn.js"></script>
     <script src="src/components/game.js"></script>
-    <script src="src/pageManagers/gameplay.js"></script>
     <script src="src/pageManagers/app.js"></script>
     <script src="src/pageManagers/games.js"></script>
     <script src ="src/adapters/UnicornsAdapter.js"></script>

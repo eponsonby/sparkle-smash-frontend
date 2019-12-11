@@ -3,6 +3,20 @@ p {
     
 }
 
+body {
+    background-color: #FFF9F9
+}
+
+
+
+h4 {
+    text-align: center;
+    font-family: 'Galada';
+    font-size: 50px;
+    color: #DB7F8E;
+    margin-top: 15px;
+}
+
 #game-container {
     border: 1px solid black;
     background-color: #8ACEF3;
@@ -48,7 +62,7 @@ p {
 
 #unicorn {
     width: 100px;
-    height: 200px;
+    height: 100px;
     margin-left: auto;
     margin-right: auto;
     display: block;
