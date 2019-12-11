@@ -9,6 +9,7 @@ class Unicorns {
         this.currentHole
         this.currentInterval = null
         this.paused = false
+        this.counter = 0
     }
 
     initBindingsAndEventListeners() {
@@ -31,34 +32,57 @@ class Unicorns {
         })
     }
 
+    // async handleBeginGame() {
+    //     this.gameplay = new Gameplay()
+    //     let promise = new Promise((resolve, reject) => {
+    //         setInterval(() => {
+    //             this.gameplay.increaseSpeed()
+    //             console.log(this.gameplay.unicornSpeed)
+    //          }, 3000)
+    //          resolve("success")
+    //         })
+
+    //     let result = await promise
+    //     console.log(result)
+    
     handleBeginGame() {
         this.gameplay = new Gameplay()
-        this.currentInterval = setInterval(() => {
-                if(this.rendered) {
-                    this.rendered = false
-                    this.gameplay.renderScore()
-                    this.derenderUnicorn()
-                } else {
-                    this.rendered = true
-                    this.gameplay.renderScore()
-                    this.renderUnicorn()
-                }
-        }, 2000)
+        this.loopCorns()
     }
 
-    // handlePauseGame() {
-    //     if(this.paused) {
-    //         this.paused = false
-    //         document.querySelector("#pause-button").innerHTML = "pause"
-    //     } else {
-    //         this.paused = true
-    //         document.querySelector("#pause-button").innerHTML = "unpause"
-    //     }
-    // }
+    loopCorns() {
+            this.currentInterval = setInterval(() => {
+            this.counter += 1
+            console.log(this.counter)
+
+                if(this.counter === 100) {
+                    this.handleEndGame()
+                } else if (
+                    this.counter % 10 === 0 && this.gameplay.unicornSpeed > 400) {
+                    this.gameplay.increaseSpeed()
+                    clearInterval(this.currentInterval)
+                    this.loopCorns()
+                } else {
+                    if(this.rendered) {
+                        this.rendered = false
+                        this.gameplay.renderScore()
+                        this.derenderUnicorn()
+                    } else {
+                        this.rendered = true
+                        this.gameplay.renderScore()
+                        this.renderUnicorn()
+                    }
+                }
+        }, this.gameplay.unicornSpeed)
+ 
+
+        }
 
     handleEndGame() {
-        this.derenderUnicorn()
         clearInterval(this.currentInterval)
+        this.derenderUnicorn()
+        console.log(this.gameplay.score)
+        // save this.gameplay.score to the db
     }
 
      renderUnicorn() {

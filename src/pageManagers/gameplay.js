@@ -1,14 +1,8 @@
 class Gameplay {
-    // maybe add difficulty level
-    // game state - running, paused, completed. Once complete, post game to the database
-    // decrease the unicorn speed, every tiem you get a hit, clear speed then 
-    // set a new speed
-    // this.currentInterval = setInterval
     
     constructor() {
         this.score = 0
-        this.unicornSpeed = 3000
-        this.state = 'running'
+        this.unicornSpeed = 2000
     }
 
     initBindingsAndEventListeners() {
@@ -26,7 +20,9 @@ class Gameplay {
         document.querySelector("#game-container p").innerHTML = this.score
     }
 
-    renderState() {
-        console.log(this.state)
+    increaseSpeed() {
+        this.unicornSpeed -= 400
+        return this.unicornSpeed
     }
+
 }
