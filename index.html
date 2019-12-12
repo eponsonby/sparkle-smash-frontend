@@ -11,18 +11,18 @@
 </head>
 <body>
     <h4>Sparkle Smash</h4>
+    
+    <div id ="welcome-screen">
+        <form id="new-user">
+            name:
+        <input type="text" name="name" id="user-name">
+        </form>
+        <button id="begin-button">begin</button>
+    </div>
+
     <div id ="app-container">
-            <div id ="welcome-screen">
-                    <h1>Welcome! Please enter your name</h1>
-                    <form id="new-user" action="http://localhost:3000/users">
-                            name:
-                            <input type="text" name="name">
-                            <input type="submit" value="Submit">
-                          </form>
-                </div>
         <p></p>
         <div id="game-container">
-                <button id="begin-button">begin</button>
                 <button id="end-button">end game</button>
             <p></p>
             <div id ="unicorns-grid">
@@ -62,13 +62,13 @@
     </div>
     <script src="src/components/unicorn.js"></script>
     <script src="src/components/game.js"></script>
+    <script src="src/components/user.js"></script>
     <script src="src/pageManagers/app.js"></script>
     <script src="src/pageManagers/games.js"></script>
     <script src ="src/adapters/UnicornsAdapter.js"></script>
     <script src ="src/adapters/GamesAdapter.js"></script>
+    <script src ="src/adapters/UsersAdapter.js"></script>
     <script src="src/index.js"></script>
-    
-
     
 </body>
 </html>

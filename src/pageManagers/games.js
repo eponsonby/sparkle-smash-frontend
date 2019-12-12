@@ -2,12 +2,14 @@ class Games {
     constructor() {
         this.games = []
         this.unicornsArray = [] 
+        this.usersArray = []
+        this.currentUserId = 0
         this.gamesAdapter = new GamesAdapter()
         this.usersAdapter = new UsersAdapter()
         this.unicornsAdapter = new UnicornsAdapter()
-        this.initBindingsAndEventListeners()
         this.fetchAndLoadUnicorns()
         this.fetchAndLoadGames()
+        this.initBindingsAndEventListeners()
         this.rendered = false
         this.currentHole
         this.currentInterval = null
@@ -15,6 +17,8 @@ class Games {
         this.counter = 0
         this.score = 0
         this.unicornSpeed = 2000
+        this.name = ''
+        this.currentUserId = ''
    }
 
     initBindingsAndEventListeners() {
@@ -41,12 +45,18 @@ class Games {
         })
     }
 
+    fetchAndLoadUsers() {
+        this.usersAdapter.getUsers().then(users => {
+            users.forEach(user => this.usersArray.push(new User(user)))
+        })
+    }
+
     renderScores() {
         document.querySelector("#app-container p").innerHTML = this.games.map(g => g.html).join("")
     }
 
 
-    loopCorns() {
+    async loopCorns() {
         this.currentInterval = setInterval(() => {
         this.counter += 1
 
@@ -58,7 +68,7 @@ class Games {
                 clearInterval(this.currentInterval)
                 this.loopCorns()
             } else {
-                if(this.rendered) {
+                if(this.rendered) { 
                     this.rendered = false
                     this.renderScore()
                     this.derenderUnicorn()
@@ -88,6 +98,7 @@ class Games {
         let hole = this.currentHole
         let unicornImage = hole.getElementsByTagName("img").namedItem("unicorn")
         unicornImage.parentNode.removeChild(unicornImage)
+
     }
     
     handleSmash(event) {
@@ -103,21 +114,20 @@ class Games {
     }
 
     handleBeginGame() {
+        this.createUser()
         this.loopCorns()
     }
 
-    getUser() {
-        let name = document.forms['new-user'].elements['text'].value
-        console.log(name)
-    }
-
-    createUser() {
+    async createUser() {
+        this.name = document.getElementById("user-name").value
+        
         try{
-            await.this.usersAdapter.saveUsers({
+            const userObj = await this.usersAdapter.saveUser({
                 user: {
                     name: this.name
                 }
             })
+            this.currentUser = new User(userObj)
         } catch(err){
             alert( err.status )
         }
@@ -130,7 +140,7 @@ class Games {
 
             const jsonObj = await this.gamesAdapter.saveGame({
                 game: {
-                    user_id: 1,
+                    user_id: this.currentUser.id,
                     score: this.score
                 }
             })
@@ -142,6 +152,7 @@ class Games {
         }
         
     }
+
 
     randomHole() {
         let number = Math.floor(Math.random() * 9) + 1

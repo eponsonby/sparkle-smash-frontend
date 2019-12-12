@@ -9,7 +9,7 @@ class UsersAdapter {
     }
 
     async saveUser(params) {
-        const res = await fetch(this.baseUrl, {
+        const res = await fetch(this.baseUrl, { 
             method: "POST",
             headers: {
                 'Content-Type': "application/json",
@@ -17,6 +17,7 @@ class UsersAdapter {
             },
             body: JSON.stringify(params)
         })
+
         if(res.status < 200 || res.status > 299){
             throw { status: res.status }
         }
