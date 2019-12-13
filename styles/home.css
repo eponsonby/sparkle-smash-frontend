@@ -8,7 +8,11 @@ body {
 
 }
 
-
+#splat {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+}
 
 
 h4 {

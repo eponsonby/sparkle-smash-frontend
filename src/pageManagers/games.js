@@ -63,7 +63,7 @@ class Games {
             if(this.counter === 100) {
                 this.handleEndGame()
             } else if (
-                this.counter % 10 === 0 && this.unicornSpeed > 400) {
+                this.counter % 10 === 0 && this.unicornSpeed > 350) {
                 this.increaseSpeed()
                 clearInterval(this.currentInterval)
                 this.loopCorns()
@@ -100,10 +100,25 @@ class Games {
         unicornImage.parentNode.removeChild(unicornImage)
 
     }
+
+
+    renderSplat() {
+        let splat = document.createElement("img")
+        splat.src = 'styles/splat!.png'
+        splat.id = "splat"
+        this.currentHole.appendChild(splat)
+        setTimeout(this.derenderSplat, 1000)
+    }
+
+    derenderSplat() {
+            let allSplats = document.querySelectorAll("#splat")
+            allSplats.forEach(splat => splat.style.display = "none")
+        }
     
     handleSmash(event) {
         if (event.target.id === "unicorn") {
             this.registerSmash()
+            this.renderSplat()
             this.derenderUnicorn()
             this.rendered = false
         }
