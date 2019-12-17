@@ -72,8 +72,9 @@ class Games {
 
     renderScores() {
         let sortedGames = this.games.sort( this.sortGamesByScore ).slice(-20)
+        let table = document.querySelector("#score-table")
+        table.innerHTML = ""
             sortedGames.forEach(game => {
-            let table = document.querySelector("#score-table")
             let row = table.insertRow(0)
             let cell1 = row.insertCell(0)
             let cell2 = row.insertCell(1)
@@ -86,11 +87,12 @@ class Games {
     async loopCorns() {
         this.currentInterval = setInterval(() => {
         this.counter += 1
-
             if(this.counter === 100) {
+                console.log(this.counter)
                 this.handleEndGame()
             } else if (
-                this.counter % 10 === 0 && this.unicornSpeed > 400) {
+                this.counter % 10 === 0 && this.unicornSpeed > 900) {
+                    console.log(this.counter)
                 this.increaseSpeed()
                 clearInterval(this.currentInterval)
                 this.loopCorns()
@@ -115,7 +117,6 @@ class Games {
         let randomHole = this.randomHole()
         let image = document.createElement("img")
         image.src = unicorn
-        console.log(image.src)
         if (image.src === "file:///Users/excellaep/Development/code/sparkle-smash/js-frontend/styles/sleepy-corn.png"){
             image.id = "sleepy-corn"
         } else {
@@ -200,6 +201,10 @@ class Games {
                     score: this.score
                 }
             })
+
+            const newGame = new Game(jsonObj)
+            this.games.push(newGame)
+            this.renderScores()
 
         }catch(err){
 
