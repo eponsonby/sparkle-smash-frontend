@@ -8,6 +8,11 @@
     color: #545354;
 }
 
+#begin-button {
+    font-family: "Roboto";
+
+}
+
 #score-board h3 {
     font-family:'Bungee Shade';
     font-size: 30px;

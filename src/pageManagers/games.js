@@ -161,16 +161,19 @@ class Games {
     }
 
     handleBeginGame() {
+        this.name = document.getElementById("user-name").value
+        if (this.name !== "") {
         this.createUser()
         document.getElementById("welcome-screen").style.visibility = 'hidden'
         document.getElementsByTagName("body")[0].style.cursor = "url('styles/wand.png') 25 15, auto"
         this.loopCorns()
+        } else {
+            alert("You must enter a username")
+        }
+        
     }
 
     async createUser() {
-        this.name = document.getElementById("user-name").value
-        if this.name = ""
-            console.log("Can't")
         try{
             const userObj = await this.usersAdapter.saveUser({
                 user: {
@@ -181,11 +184,14 @@ class Games {
         } catch(err){
             alert( err.status )
         }
-    }
+
+}
+    
 
     async handleEndGame() {
         this.derenderUnicorn()
         clearInterval(this.currentInterval)
+        document.getElementsByTagName("body")[0].style.cursor = 'initial'
         try{
 
             const jsonObj = await this.gamesAdapter.saveGame({
