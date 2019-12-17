@@ -19,6 +19,7 @@ class Games {
         this.unicornSpeed = 2000
         this.name = ''
         this.currentUserId = ''
+        this.form
    }
 
     initBindingsAndEventListeners() {
@@ -29,6 +30,13 @@ class Games {
         this.container = document.querySelector("#unicorns-grid")
         this.container.addEventListener("click", this.handleSmash.bind(this))
         this.unicornHoles = document.querySelectorAll("#unicorn-holes")
+        // Prevent form submission upon hitting the enter key
+        document.getElementById("new-user").onkeypress = function(e) {
+            let key = e.charCode || e.keyCode || 0;
+            if (key === 13) {
+                e.preventDefault()
+            }
+        }
     }
 
     fetchAndLoadGames() {
@@ -51,9 +59,28 @@ class Games {
         })
     }
 
+    sortGamesByScore( a, b ) {
+        if ( a.score < b.score ){
+          return -1;
+        }
+        if ( a.score > b.score ){
+          return 1;
+        }
+        return 0;
+      }
+
+
     renderScores() {
-        document.querySelector("#app-container p").innerHTML = this.games.map(g => g.html).join("")
-    }
+        let sortedGames = this.games.sort( this.sortGamesByScore ).slice(-20)
+            sortedGames.forEach(game => {
+            let table = document.querySelector("#score-table")
+            let row = table.insertRow(0)
+            let cell1 = row.insertCell(0)
+            let cell2 = row.insertCell(1)
+            cell1.innerHTML = game.name
+            cell2.innerHTML = game.score
+            })
+        }
 
 
     async loopCorns() {
@@ -63,7 +90,7 @@ class Games {
             if(this.counter === 100) {
                 this.handleEndGame()
             } else if (
-                this.counter % 10 === 0 && this.unicornSpeed > 350) {
+                this.counter % 10 === 0 && this.unicornSpeed > 400) {
                 this.increaseSpeed()
                 clearInterval(this.currentInterval)
                 this.loopCorns()
@@ -88,7 +115,12 @@ class Games {
         let randomHole = this.randomHole()
         let image = document.createElement("img")
         image.src = unicorn
-        image.id = "unicorn"
+        console.log(image.src)
+        if (image.src === "file:///Users/excellaep/Development/code/sparkle-smash/js-frontend/styles/sleepy-corn.png"){
+            image.id = "sleepy-corn"
+        } else {
+            image.id = "unicorn"
+        }
         randomHole.appendChild(image)
         this.currentHole = randomHole
     }
@@ -96,7 +128,7 @@ class Games {
 
     derenderUnicorn() {
         let hole = this.currentHole
-        let unicornImage = hole.getElementsByTagName("img").namedItem("unicorn")
+        let unicornImage = hole.getElementsByTagName("img").namedItem("unicorn") || hole.getElementsByTagName("img").namedItem("sleepy-corn")
         unicornImage.parentNode.removeChild(unicornImage)
 
     }
@@ -107,7 +139,7 @@ class Games {
         splat.src = 'styles/splat!.png'
         splat.id = "splat"
         this.currentHole.appendChild(splat)
-        setTimeout(this.derenderSplat, 1000)
+        setTimeout(this.derenderSplat, 500)
     }
 
     derenderSplat() {
@@ -116,7 +148,7 @@ class Games {
         }
     
     handleSmash(event) {
-        if (event.target.id === "unicorn") {
+        if (event.target.id === "unicorn" || event.target.id === "sleepy-corn") {
             this.registerSmash()
             this.renderSplat()
             this.derenderUnicorn()
@@ -130,12 +162,15 @@ class Games {
 
     handleBeginGame() {
         this.createUser()
+        document.getElementById("welcome-screen").style.visibility = 'hidden'
+        document.getElementsByTagName("body")[0].style.cursor = "url('styles/wand.png') 25 15, auto"
         this.loopCorns()
     }
 
     async createUser() {
         this.name = document.getElementById("user-name").value
-        
+        if this.name = ""
+            console.log("Can't")
         try{
             const userObj = await this.usersAdapter.saveUser({
                 user: {
@@ -149,8 +184,8 @@ class Games {
     }
 
     async handleEndGame() {
-        clearInterval(this.currentInterval)
         this.derenderUnicorn()
+        clearInterval(this.currentInterval)
         try{
 
             const jsonObj = await this.gamesAdapter.saveGame({
@@ -165,7 +200,6 @@ class Games {
             alert( err.status )
 
         }
-        
     }
 
 
@@ -176,7 +210,7 @@ class Games {
     }
 
     renderScore() {
-        document.querySelector("#game-container p").innerHTML = this.score
+        document.querySelector("#current-score p").innerHTML = this.score
     }
 
     increaseSpeed() {

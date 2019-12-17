@@ -1,38 +1,77 @@
-p {
-    color: blue;
+#score-board {
+    width: 250px;
+    text-align: center;
+    font-family: "Roboto";
+    background-color: #f2ebf2;
+    border: 1px solid black;
+    box-shadow: 10px 5px #545354;
+    color: #545354;
+}
+
+#score-board h3 {
+    font-family:'Bungee Shade';
+    font-size: 30px;
+    color: #DB7F8E;
+    margin-top: 1px;
+    margin-bottom: 8px;
+}
+
+#current-score {
+    width: 250px;
+    height: 650px;
+    font-size: 60px;
+    margin-right: 40px; 
+    text-align: center;
+    vertical-align: middle;
+    font-family:'Roboto';
+    font-size: 30px;
+    color: #545354;
+    background-color: #f2ebf2;
+    border: 1px solid black;
+    box-shadow: 10px 5px #545354;
+}
+
+#current-score h3 {
+    margin-top: 1px;
+    color: #DB7F8E;
+    font-family: "Bungee Shade";
+}
+
+#current-score p {
+    font-size: 50px;
 }
 
 body {
     background-color: #FFF9F9;
-    cursor: url('wand.png') 25 15, auto;
-
-}
-
-#splat {
-    height: 50px;
-    width: 50px;
-    position: absolute;
+    cursor: initial;
+    background-image: url("stars.png");
+    background-repeat: repeat;
+    background-size: 500px;
+    /* animation: twinkle 2s ease;
+    animation-iteration-count: infinite; */
 }
 
 
 h4 {
     text-align: center;
     font-family: 'Galada';
-    font-size: 50px;
+    font-size: 70px;
     color: #DB7F8E;
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 2px;
 }
 
+#app-container {
+    display: flex;
+}
 
 #game-container {
     border: 1px solid black;
     background-color: #8ACEF3;
-    position: fixed;
     width: 800px;
     height: 650px;
-    left: 45%;
-    top: 100px;
-    margin-left: -300px; 
+    margin: 0 auto;
+
 }
 
 
@@ -43,7 +82,6 @@ h4 {
     flex-wrap: wrap;
 
     /*Browser support grid */
-    align-items: center ;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-auto-rows: minmax(200px, auto);
@@ -57,8 +95,7 @@ h4 {
     padding-left: 5px;
     padding-top: 1px;
     padding-right: 5px;
-
-
+    position: relative;
     
     /* Flex Fallback */
     margin-left: 5px;
@@ -67,15 +104,54 @@ h4 {
 }
 
 
-#unicorn, #splat {
+#unicorn {
     width: 100px;
     height: 130px;
     position: absolute;
-    left: 44%;
-    z-index: 999;
+    z-index: 100;
+    text-align: center;
+}
 
+
+#splat {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    z-index: 100;
+}
+
+#sleepy-corn {
+    width: 150px;
+    height: 100px;
+    position: absolute;
+    z-index: 100;
 }
 
 #cloud-image {
-    position: relative;
+    margin-top: 30px;
+    position: absolute;
+    z-index: 1;
+}
+
+#welcome-screen {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    z-index: 999;
+    text-align: center;
+    margin-left: 200px;
+    margin-top: 150px;
+    visibility: visible;
+    background-color: #f2ebf2;
+    border: 1px solid black;
+    box-shadow: 10px 5px #545354;
+    color: #545354;
+    font-family: "Roboto";
+
+}
+
+@keyframes twinkle  {
+    0% { opacity: 0.0; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.0; }
 }

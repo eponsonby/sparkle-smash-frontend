@@ -7,24 +7,27 @@
     <link rel ="stylesheet" href="styles/home.css">
     <link href="https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Galada&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
     <h4>Sparkle Smash</h4>
-    
-    <div id ="welcome-screen">
-        <form id="new-user">
-            name:
-        <input type="text" name="name" id="user-name">
-        </form>
-        <button id="begin-button">begin</button>
-    </div>
 
     <div id ="app-container">
-        <p></p>
+        <div id="score-board">
+            <h3>Top Scores</h3>
+            <table style="width:100%" id="score-table">
+              </table>
+        </div>
         <div id="game-container">
-                <button id="end-button">end game</button>
-            <p></p>
+                <div id ="welcome-screen">
+                    <h3>Welcome!</h3>
+                    <p>Please enter a username to play</p>
+                        <form id="new-user">
+                        <input type="text" name="name" id="user-name">
+                        </form>
+                        <button id="begin-button">Start Game</button>
+                </div>
             <div id ="unicorns-grid">
                 <div id="unicorn-holes">
                     <div id='1'>
@@ -57,6 +60,11 @@
                 </div>
             </div>
 
+        </div>
+        <div id ="current-score">
+            <h3>Current Score</h3>
+            <p></p>
+            <button id="end-button">End Game</button>
         </div>
     </div>
     <script src="src/components/unicorn.js"></script>
