@@ -1,5 +1,6 @@
 #score-board {
     width: 250px;
+    height: 500px;
     text-align: center;
     font-family: "Roboto";
     background-color: #f2ebf2;
@@ -23,7 +24,7 @@
 
 #current-score {
     width: 250px;
-    height: 650px;
+    height: 500px;
     font-size: 60px;
     margin-right: 40px; 
     text-align: center;

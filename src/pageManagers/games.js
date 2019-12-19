@@ -3,7 +3,6 @@ class Games {
         this.games = []
         this.unicornsArray = [] 
         this.usersArray = []
-        this.currentUserId = 0
         this.gamesAdapter = new GamesAdapter()
         this.usersAdapter = new UsersAdapter()
         this.unicornsAdapter = new UnicornsAdapter()
@@ -21,6 +20,7 @@ class Games {
         this.currentUserId = ''
         this.form
    }
+
 
     initBindingsAndEventListeners() {
         this.startGameButton = document.querySelector("#begin-button")
@@ -88,12 +88,12 @@ class Games {
         this.currentInterval = setInterval(() => {
         this.counter += 1
             if(this.counter === 100) {
-                console.log(this.counter)
+                this.derenderUnicorn
                 this.handleEndGame()
             } else if (
-                this.counter % 10 === 0 && this.unicornSpeed > 900) {
-                    console.log(this.counter)
+                this.counter % 10 === 0 && this.unicornSpeed > 600) {
                 this.increaseSpeed()
+                console.log(`Level ${this.counter}`)
                 clearInterval(this.currentInterval)
                 this.loopCorns()
             } else {
@@ -190,7 +190,6 @@ class Games {
     
 
     async handleEndGame() {
-        this.derenderUnicorn()
         clearInterval(this.currentInterval)
         document.getElementsByTagName("body")[0].style.cursor = 'initial'
         try{
@@ -225,7 +224,7 @@ class Games {
     }
 
     increaseSpeed() {
-        this.unicornSpeed -= 400
+        this.unicornSpeed -= 200
         return this.unicornSpeed
     }
 }
