@@ -202,6 +202,8 @@ class Games {
             })
 
             const newGame = new Game(jsonObj)
+            console.log(jsonObj)
+            /// only add newGame to this.games if it doesn't already exist. 
             this.games.push(newGame)
             this.renderScores()
 
