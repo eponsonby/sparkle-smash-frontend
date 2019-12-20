@@ -1,6 +1,6 @@
 class GamesAdapter {
     constructor() {
-        this.baseUrl = 'http://localhost:3000/games'
+        this.baseUrl = 'https://sparkle-smash.herokuapp.com/games'
     }
 
     getGames() {
