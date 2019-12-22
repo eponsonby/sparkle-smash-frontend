@@ -1,6 +1,6 @@
 class UnicornsAdapter {
     constructor() {
-        this.baseUrl = 'https://sparkle-smash.herokuapp.com/unicorns'
+        this.baseUrl = 'https://sparkle-smash-api.herokuapp.com/unicorns'
     }
 
     getUnicorns() {

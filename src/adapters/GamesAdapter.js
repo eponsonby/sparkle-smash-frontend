@@ -1,6 +1,6 @@
 class GamesAdapter {
     constructor() {
-        this.baseUrl = 'https://sparkle-smash.herokuapp.com/games'
+        this.baseUrl = 'https://sparkle-smash-api.herokuapp.com/games'
     }
 
     getGames() {

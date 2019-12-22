@@ -1,6 +1,6 @@
 class UsersAdapter {
     constructor() {
-        this.baseUrl = 'https://sparkle-smash.herokuapp.com/users'
+        this.baseUrl = 'https://sparkle-smash-api.herokuapp.com/users'
     }
 
     getUsers() {

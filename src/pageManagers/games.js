@@ -94,6 +94,7 @@ class Games {
             } else if (
                 this.counter % 10 === 0 && this.unicornSpeed > 600) {
                 this.increaseSpeed()
+                console.log(this.counter)
                 clearInterval(this.currentInterval)
                 this.loopCorns()
             } else {
@@ -225,7 +226,7 @@ handleBeginGame() {
     }
 
     increaseSpeed() {
-        this.unicornSpeed -= 200
+        this.unicornSpeed -= 250
         return this.unicornSpeed
     }
 }
