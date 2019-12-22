@@ -89,6 +89,8 @@ class Games {
         this.counter += 1
             if(this.counter === 100) {
                 this.derenderUnicorn
+                this.endGameButton.disabled = true
+                console.log("click event removed")
                 this.handleEndGame()
             } else if (
                 this.counter % 10 === 0 && this.unicornSpeed > 600) {
@@ -161,19 +163,6 @@ class Games {
         this.score = this.score + 10
     }
 
-    handleBeginGame() {
-        this.name = document.getElementById("user-name").value
-        if (this.name !== "") {
-        this.createUser()
-        document.getElementById("welcome-screen").style.visibility = 'hidden'
-        document.getElementsByTagName("body")[0].style.cursor = "url('styles/wand.png') 25 15, auto"
-        this.loopCorns()
-        } else {
-            alert("You must enter a username")
-        }
-        
-    }
-
     async createUser() {
         try{
             const userObj = await this.usersAdapter.saveUser({
@@ -187,10 +176,22 @@ class Games {
         }
 
 }
+
+handleBeginGame() {
+    this.name = document.getElementById("user-name").value
+    if (this.name !== "") {
+    this.createUser()
+    document.getElementById("welcome-screen").style.visibility = 'hidden'
+    document.getElementsByTagName("body")[0].style.cursor = "url('styles/wand.png') 25 15, auto"
+    this.loopCorns()
+    } else {
+        alert("You must enter a username")
+    }
+    
+}
     
 
     async handleEndGame() {
-        this.endGameButton.removeEventListener('click', this.handleEndGame.bind(this))
         clearInterval(this.currentInterval)
         document.getElementsByTagName("body")[0].style.cursor = 'initial'
         try{
