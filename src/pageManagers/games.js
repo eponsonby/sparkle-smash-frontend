@@ -90,12 +90,10 @@ class Games {
             if(this.counter === 100) {
                 this.derenderUnicorn
                 this.endGameButton.disabled = true
-                console.log("click event removed")
                 this.handleEndGame()
             } else if (
                 this.counter % 10 === 0 && this.unicornSpeed > 600) {
                 this.increaseSpeed()
-                console.log(`Level ${this.counter}`)
                 clearInterval(this.currentInterval)
                 this.loopCorns()
             } else {
@@ -192,8 +190,9 @@ handleBeginGame() {
     
 
     async handleEndGame() {
-        clearInterval(this.currentInterval)
+        this.endGameButton.disabled = true
         document.getElementsByTagName("body")[0].style.cursor = 'initial'
+        clearInterval(this.currentInterval)
         try{
 
             const jsonObj = await this.gamesAdapter.saveGame({
