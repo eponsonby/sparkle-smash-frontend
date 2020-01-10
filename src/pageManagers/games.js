@@ -179,10 +179,10 @@ class Games {
 handleBeginGame() {
     this.name = document.getElementById("user-name").value
     if (this.name !== "") {
-    this.createUser()
-    document.getElementById("welcome-screen").style.visibility = 'hidden'
-    document.getElementsByTagName("body")[0].style.cursor = "url('styles/wand.png') 25 15, auto"
-    this.loopCorns()
+        this.createUser()
+        document.getElementById("welcome-screen").style.visibility = 'hidden'
+        document.getElementsByTagName("body")[0].style.cursor = "url('styles/wand.png') 25 15, auto"
+        this.loopCorns()
     } else {
         alert("You must enter a username")
     }
