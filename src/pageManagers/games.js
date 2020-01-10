@@ -179,6 +179,7 @@ class Games {
 handleBeginGame() {
     this.name = document.getElementById("user-name").value
     if (this.name !== "" && !this.name.includes("<")) {
+        // figure out how to prevent form html injection
         this.createUser()
         document.getElementById("welcome-screen").style.visibility = 'hidden'
         document.getElementsByTagName("body")[0].style.cursor = "url('styles/wand.png') 25 15, auto"
